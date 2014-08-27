@@ -1,0 +1,12 @@
+[L]ibrary/
+[Tt]emp/
+[Oo]bj/
+
+*.csproj
+*.unityproj
+*.sln
+*.pidb
+
+build
+.DS_Store
+*.userprefs
