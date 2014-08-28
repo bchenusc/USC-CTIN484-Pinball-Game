@@ -23,10 +23,10 @@ public class InputManager : Singleton{
 	public event ActionKey OnKeyUp;
 	#endregion
 
-	public KeyCode p1Left = KeyCode.Alpha1;
-	public KeyCode p1Right = KeyCode.Alpha2;
-	public KeyCode p2Left = KeyCode.Alpha9;
-	public KeyCode p2Right = KeyCode.Alpha0;
+	public KeyCode p1Left = KeyCode.Alpha2;
+	public KeyCode p1Right = KeyCode.Alpha1;
+	public KeyCode p2Left = KeyCode.Alpha0;
+	public KeyCode p2Right = KeyCode.Alpha9;
 
 	private bool p1LeftDown = false;
 	private bool p1RightDown = false;
@@ -60,6 +60,7 @@ public class InputManager : Singleton{
 			// P2 Left
 			if (Input.GetKey(p2Left)) {
 				p2LeftDown = true;
+				Debug.Log ("p2Left");
 				OnKeyHeld (p2Left);
 			} else {
 				if (p2LeftDown) {
