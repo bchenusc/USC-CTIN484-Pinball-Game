@@ -31,8 +31,8 @@ public class GameState : Singleton {
 	}
 
 	void OnLevelWasLoaded(int i){
-		i_CurrentLevel = GetCurrentLevelInt();
-		i_NextLevelQueue = 0; // I set this to zero here. When you change levels, make sure you set which level you are changing to.
+		// i_CurrentLevel = GetCurrentLevelInt();
+		// i_NextLevelQueue = 0; // I set this to zero here. When you change levels, make sure you set which level you are changing to.
 
 	}
 #endregion

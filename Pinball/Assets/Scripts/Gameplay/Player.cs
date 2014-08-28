@@ -9,10 +9,4 @@ public class Player : MonoBehaviour {
 	}
 
 	public PlayerType myPlayer = PlayerType.PLAYER1;
-
-	public KeyCode left_control = KeyCode.Alpha1;
-	public KeyCode right_control = KeyCode.Alpha2;
-
-
-
 }
