@@ -7,20 +7,16 @@ public class Paddle : MonoBehaviour {
 		RIGHT
 	}
 
-	public Player mPlayerScript;
 	public PaddleType mPaddleType = PaddleType.LEFT;
 
 	private float mFPaddleRest;
 	private float mFPaddlePressed;
-	private float mFPaddleStr;
-	private float mFPaddleDamper;
 	private InputManager mInputManager;
 	private HingeJoint2D mHingeJoint;
 	private JointMotor2D mJointMotor;
 
 	public int mMotorPowerUp = 1000;
-
-	private Vector2 position2D;
+	bool isPlayer1 = true;
 
 	void Start(){
 		// Singleton Registration
@@ -29,26 +25,25 @@ public class Paddle : MonoBehaviour {
 		mInputManager.RegisterOnKeyUp (UnFlip);
 		// Variable Registration
 		// Requirement: Player object is the parent.
-		position2D = new Vector2 (transform.position.x, transform.position.y);
-		mPlayerScript = transform.parent.parent.GetComponent<Player>();
 		// Spring and Hinge joint initialization
-		mFPaddleStr = 10f;
-		mFPaddleDamper = 1f;
 		mHingeJoint = transform.GetComponent<HingeJoint2D> ();
+		mHingeJoint.connectedAnchor = new Vector2(transform.parent.position.x,
+		                                          transform.parent.position.y);
 		mHingeJoint.useMotor = true;
 		mHingeJoint.useLimits = true;
 		JointAngleLimits2D jointLimits = mHingeJoint.limits;
-		//transform.rotation = Quaternion.AngleAxis (180, Vector3.forward);
+
+		isPlayer1 = transform.CompareTag("Player1");
 		if (isLeftPaddle()) {
 			mFPaddleRest = 0f;
-			mFPaddlePressed = 45f;
+			mFPaddlePressed = 60f;
+			mHingeJoint.anchor = new Vector2(0.1f, mHingeJoint.anchor.y);
 		} else {
-			mFPaddleRest = -45f;
+			mFPaddleRest = -60f;
 			mFPaddlePressed = 0f;
 			mHingeJoint.anchor = new Vector2(-0.1f, mHingeJoint.anchor.y);
 		}
-		mHingeJoint.connectedAnchor = new Vector2(transform.parent.position.x,
-		                                          transform.parent.position.y);
+
 		jointLimits.min = mFPaddleRest;
 		jointLimits.max = mFPaddlePressed;
 		mHingeJoint.limits = jointLimits;
@@ -59,7 +54,7 @@ public class Paddle : MonoBehaviour {
 	}
 	
 	void Flip(KeyCode key) {
-		if (isPlayer1()) {
+		if (isPlayer1) {
 			// PLAYER 1
 			if (isLeftPaddle()) {
 				// LEFT PADDLE
@@ -93,7 +88,7 @@ public class Paddle : MonoBehaviour {
 	}
 
 	void UnFlip(KeyCode key) {
-		if (isPlayer1()){
+		if (isPlayer1){
 			// LEFT PADDLE
 			if(isLeftPaddle()) {
 				if (key == mInputManager.p1Left){
@@ -123,14 +118,6 @@ public class Paddle : MonoBehaviour {
 					mHingeJoint.motor = mJointMotor;
 				}
 			}
-		}
-	}
-
-	bool isPlayer1() {
-		if (mPlayerScript.myPlayer == Player.PlayerType.PLAYER1) {
-			return true;
-		} else {
-			return false;
 		}
 	}
 

@@ -60,7 +60,6 @@ public class InputManager : Singleton{
 			// P2 Left
 			if (Input.GetKey(p2Left)) {
 				p2LeftDown = true;
-				Debug.Log ("p2Left");
 				OnKeyHeld (p2Left);
 			} else {
 				if (p2LeftDown) {

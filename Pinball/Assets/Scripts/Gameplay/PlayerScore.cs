@@ -5,7 +5,7 @@ public class PlayerScore : MonoBehaviour {
 
 	void Start() {
 		// Register with GuiManager.
-		if (transform.parent.CompareTag("Player1")) {
+		if (transform.CompareTag("Player1")) {
 			SingletonObject.Get.getGuiManager().RegisterP1GuiText(
 				transform.GetComponent<GUIText>());
 		}

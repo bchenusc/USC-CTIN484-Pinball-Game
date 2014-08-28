@@ -37,8 +37,7 @@ public class GuiManager : Singleton{
 	}
 
 	public void UpdateP2GuiText() {
-		mP2GuiText.text = 
-			"P2 Score: " + mGameState.Player2Score;
+		mP2GuiText.text = "P2 Score: " + mGameState.Player2Score;
 	}
 
 	
