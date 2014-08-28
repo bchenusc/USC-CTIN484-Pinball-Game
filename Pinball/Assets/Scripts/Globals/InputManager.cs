@@ -49,26 +49,32 @@ public class InputManager : Singleton{
 			}
 			// P1 Right
 			if (Input.GetKey(p1Right)) {
+				p1RightDown = true;
 				OnKeyHeld (p1Right);
 			} else {
 				if (p1RightDown) {
 					OnKeyUp(p1Right);
+					p1RightDown = false;
 				}
 			}
 			// P2 Left
 			if (Input.GetKey(p2Left)) {
+				p2LeftDown = true;
 				OnKeyHeld (p2Left);
 			} else {
 				if (p2LeftDown) {
 					OnKeyUp(p2Left);
+					p2LeftDown = false;
 				}
 			}
 			// P2 Right
 			if (Input.GetKey(p2Right)) {
+				p2RightDown = true;
 				OnKeyHeld (p2Right);
 			} else {
 				if (p2RightDown) {
 					OnKeyUp(p2Right);
+					p2RightDown = false;
 				}
 			}
 		} 

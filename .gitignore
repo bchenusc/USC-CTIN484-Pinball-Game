@@ -1,6 +1,6 @@
-[L]ibrary/
-[Tt]emp/
-[Oo]bj/
+*/[Ll]ibrary/
+*/[Tt]emp/
+*/[Oo]bj/
 
 *.csproj
 *.unityproj
