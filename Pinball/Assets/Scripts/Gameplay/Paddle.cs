@@ -32,7 +32,6 @@ public class Paddle : MonoBehaviour {
 		position2D = new Vector2 (transform.position.x, transform.position.y);
 		mPlayerScript = transform.parent.parent.GetComponent<Player>();
 		// Spring and Hinge joint initialization
-		mFPaddleRest = 0f;
 		mFPaddleStr = 10f;
 		mFPaddleDamper = 1f;
 		mHingeJoint = transform.GetComponent<HingeJoint2D> ();
@@ -40,7 +39,16 @@ public class Paddle : MonoBehaviour {
 		mHingeJoint.useLimits = true;
 		JointAngleLimits2D jointLimits = mHingeJoint.limits;
 		//transform.rotation = Quaternion.AngleAxis (180, Vector3.forward);
-		mFPaddlePressed = 45f;
+		if (isLeftPaddle()) {
+			mFPaddleRest = 0f;
+			mFPaddlePressed = 45f;
+		} else {
+			mFPaddleRest = -45f;
+			mFPaddlePressed = 0f;
+			mHingeJoint.anchor = new Vector2(-0.1f, mHingeJoint.anchor.y);
+		}
+		mHingeJoint.connectedAnchor = new Vector2(transform.parent.position.x,
+		                                          transform.parent.position.y);
 		jointLimits.min = mFPaddleRest;
 		jointLimits.max = mFPaddlePressed;
 		mHingeJoint.limits = jointLimits;
@@ -56,14 +64,12 @@ public class Paddle : MonoBehaviour {
 			if (isLeftPaddle()) {
 				// LEFT PADDLE
 				if (key == mInputManager.p1Left){
-					Debug.Log("Flip p1 left");
 					mJointMotor.motorSpeed = mMotorPowerUp;
 					mHingeJoint.motor = mJointMotor;
 				}
 			} else {
 				// RIGHT PADDLE
 				if (key == mInputManager.p1Right){
-					Debug.Log ("FLip p1 Right");
 					mJointMotor.motorSpeed = -mMotorPowerUp;
 					mHingeJoint.motor = mJointMotor;
 				}
@@ -91,7 +97,6 @@ public class Paddle : MonoBehaviour {
 			// LEFT PADDLE
 			if(isLeftPaddle()) {
 				if (key == mInputManager.p1Left){
-					Debug.Log("Unflip P1 Left");
 					mJointMotor.motorSpeed = -mMotorPowerUp;
 					mHingeJoint.motor = mJointMotor;
 				} 
@@ -100,7 +105,6 @@ public class Paddle : MonoBehaviour {
 				// RRIGHT PADDLE
 				if (key == mInputManager.p1Right){
 					// Player 1 Right Paddle
-					Debug.Log ("unflip");
 					mJointMotor.motorSpeed = mMotorPowerUp;
 					mHingeJoint.motor = mJointMotor;
 				}
