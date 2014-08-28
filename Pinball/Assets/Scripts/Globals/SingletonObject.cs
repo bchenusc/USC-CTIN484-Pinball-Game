@@ -14,6 +14,7 @@ public class SingletonObject : MonoBehaviour {
 	private Timer m_Timer;
 	private GameState m_GameState;
 	private InputManager m_InputManager;
+	private GuiManager m_GuiManager;
 
 	void Awake () {
 		InitSingleton(); //Initialize singleton -- DO NOT TOUCH
@@ -27,6 +28,9 @@ public class SingletonObject : MonoBehaviour {
 	}
 	public InputManager getInputManager() {
 		return m_InputManager;
+	}
+	public GuiManager getGuiManager(){
+		return m_GuiManager;
 	}
 	                                 
 
@@ -50,6 +54,7 @@ public class SingletonObject : MonoBehaviour {
 		m_Timer = _instance.GetComponent<Timer>();
 		m_GameState = _instance.GetComponent<GameState>();
 		m_InputManager = _instance.GetComponent<InputManager>();
+		m_GuiManager = _instance.GetComponent<GuiManager>();
 	}
 	
 	public static SingletonObject Get

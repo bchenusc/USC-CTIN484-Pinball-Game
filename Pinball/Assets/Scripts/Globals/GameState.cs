@@ -12,16 +12,36 @@ using System.Collections.Generic;
 public class GameState : Singleton {
 
 	//Game Logic Here
+	private int mPlayer1Score = 0;
+	private int mPlayer2Score = 0;
 
+	GuiManager mGuiManager;
 
 	//Game Progression
 	public List<string> SCENES;
 	private int i_CurrentLevel = 0;
 	private int i_NextLevelQueue = 0; //set this before fading out to change levels.
-	
+
+	public int Player1Score {
+		get { return mPlayer1Score; }
+		set { 
+			mPlayer1Score = value;
+			mGuiManager.UpdateP1GuiText();
+		}
+	}
+
+	public int Player2Score {
+		get { return mPlayer2Score; }
+		set { 
+			mPlayer2Score = value;
+			mGuiManager.UpdateP2GuiText();
+		}
+	}
+
 #region MonoBehaviour functions
 	new void Start(){
 		base.Start();
+		mGuiManager = transform.GetComponent<GuiManager>();
 		OnLevelWasLoaded(0); //This is called when the first time the GameState is initialized.
 			
 	}
