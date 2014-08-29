@@ -68,7 +68,7 @@ public class Timer : Singleton  {
 
 				if (t.b_looping || t.i_loopThisManyTimes > 0){
 
-					if (t.i_triggerCount >= t.i_loopThisManyTimes){
+					if (!t.b_looping && t.i_triggerCount >= t.i_loopThisManyTimes){
 						t.b_removeMe = true;
 						if(t.AfterCallBackHasQueue()){
 							t.AfterCallBack();

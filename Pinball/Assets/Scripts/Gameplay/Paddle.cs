@@ -15,7 +15,7 @@ public class Paddle : MonoBehaviour {
 	private HingeJoint2D mHingeJoint;
 	private JointMotor2D mJointMotor;
 
-	public int mMotorPowerUp = 1000;
+	private int mMotorPowerUp = 777;
 	bool isPlayer1 = true;
 
 	void Start(){
@@ -29,20 +29,20 @@ public class Paddle : MonoBehaviour {
 		mHingeJoint = transform.GetComponent<HingeJoint2D> ();
 		mHingeJoint.connectedAnchor = new Vector2(transform.parent.position.x,
 		                                          transform.parent.position.y);
-		mHingeJoint.useMotor = true;
-		mHingeJoint.useLimits = true;
-		JointAngleLimits2D jointLimits = mHingeJoint.limits;
-
+		mPaddleType = transform.parent.name.Equals("RHinge") ? PaddleType.RIGHT : PaddleType.LEFT;
 		isPlayer1 = transform.CompareTag("Player1");
 		if (isLeftPaddle()) {
+			mHingeJoint.anchor = new Vector2(0.1f, mHingeJoint.anchor.y);
 			mFPaddleRest = 0f;
 			mFPaddlePressed = 60f;
-			mHingeJoint.anchor = new Vector2(0.1f, mHingeJoint.anchor.y);
 		} else {
 			mFPaddleRest = -60f;
 			mFPaddlePressed = 0f;
 			mHingeJoint.anchor = new Vector2(-0.1f, mHingeJoint.anchor.y);
 		}
+		mHingeJoint.useMotor = false;
+		mHingeJoint.useLimits = true;
+		JointAngleLimits2D jointLimits = mHingeJoint.limits;
 
 		jointLimits.min = mFPaddleRest;
 		jointLimits.max = mFPaddlePressed;
@@ -50,17 +50,22 @@ public class Paddle : MonoBehaviour {
 		mJointMotor = mHingeJoint.motor;
 		mHingeJoint.motor = mJointMotor;
 
-
 	}
 	
 	void Flip(KeyCode key) {
-		if (isPlayer1) {
+			if (isPlayer1) {
 			// PLAYER 1
 			if (isLeftPaddle()) {
 				// LEFT PADDLE
 				if (key == mInputManager.p1Left){
-					mJointMotor.motorSpeed = mMotorPowerUp;
-					mHingeJoint.motor = mJointMotor;
+					if (mHingeJoint.jointAngle < mHingeJoint.limits.max) {
+						mJointMotor.motorSpeed = mMotorPowerUp;
+						mHingeJoint.motor = mJointMotor;
+					}
+					else {
+						mJointMotor.motorSpeed = 0;
+						mHingeJoint.motor = mJointMotor;
+					}
 				}
 			} else {
 				// RIGHT PADDLE
