@@ -8,8 +8,8 @@ public class SpawnBall : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		fire ();
-		SingletonObject.Get.getTimer ().Add("ballspawner", 
-		                                    fire, 1, true);
+		SingletonObject.Get.getTimer ().Add(gameObject.GetInstanceID() + "ballspawner", 
+		                                    fire, 10, true);
 	}
 	
 	void fire() {

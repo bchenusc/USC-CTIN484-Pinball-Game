@@ -10,7 +10,7 @@ public class Booster : MonoBehaviour {
 			Rigidbody2D otherBody = c.gameObject.rigidbody2D;
 			otherBody.velocity = Vector2.zero;
 			otherBody.angularVelocity = 0;
-			otherBody.AddForce(transform.up * Random.Range (1000, 2000)); 
+			otherBody.AddForce(transform.up * Random.Range(2000, 3000)); 
 		}
 	}
 }
