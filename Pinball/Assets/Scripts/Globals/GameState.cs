@@ -26,7 +26,7 @@ public class GameState : Singleton {
 		get { return mPlayer1Score; }
 		set { 
 			mPlayer1Score = value;
-			mGuiManager.UpdateP1GuiText();
+			mGuiManager.UpdateP1GuiText(value);
 		}
 	}
 
@@ -34,7 +34,7 @@ public class GameState : Singleton {
 		get { return mPlayer2Score; }
 		set { 
 			mPlayer2Score = value;
-			mGuiManager.UpdateP2GuiText();
+			mGuiManager.UpdateP2GuiText(value);
 		}
 	}
 

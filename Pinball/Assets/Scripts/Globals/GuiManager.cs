@@ -32,16 +32,16 @@ public class GuiManager : Singleton{
 		text.text = "P2 Score: \n 0";
 	}
 
-	public void UpdateP1GuiText() {
-		if (mP1GuiText != null) {
-			mP1GuiText.text = "P1 Score: " + mGameState.Player1Score;
-		}
+	public void UpdateP1GuiText(int score) {
+		//if (mP1GuiText != null) {
+			mP1GuiText.text = "P1 Score: \n" + score;
+		//}
 	}
 
-	public void UpdateP2GuiText() {
-		if (mP2GuiText != null) {
-			mP2GuiText.text = "P2 Score: " + mGameState.Player2Score;
-		}
+	public void UpdateP2GuiText(int score) {
+		//if (mP2GuiText != null) {
+			mP2GuiText.text = "P2 Score: \n" + score;
+		//}
 	}
 
 	
