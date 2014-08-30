@@ -18,11 +18,11 @@ public class ToggleBooster : MonoBehaviour {
 			// TODO: Change color here
 
 			isEnabled = false;
-			SingletonObject.Get.getTimer().Add(gameObject.GetInstanceID() + "toogleboosterOn", ToggleBooster, 30);
+			SingletonObject.Get.getTimer().Add(gameObject.GetInstanceID() + "toggleBoosterOn", ToggleBoosterOn, 30, false);
 		}
 	}
 
-	void ToggleBoosterOn() {
+	public void ToggleBoosterOn() {
 		isEnabled = true;
 	}
 
