@@ -58,14 +58,14 @@ public class Paddle : MonoBehaviour {
 			if (isLeftPaddle()) {
 				// LEFT PADDLE
 				if (key == mInputManager.p1Left){
-					if (mHingeJoint.jointAngle < mHingeJoint.limits.max) {
+//					if (mHingeJoint.jointAngle < mHingeJoint.limits.max) {
+//						mJointMotor.motorSpeed = mMotorPowerUp;
+//						mHingeJoint.motor = mJointMotor;
+//					}
+//					else {
 						mJointMotor.motorSpeed = mMotorPowerUp;
 						mHingeJoint.motor = mJointMotor;
-					}
-					else {
-						mJointMotor.motorSpeed = 0;
-						mHingeJoint.motor = mJointMotor;
-					}
+//					}
 				}
 			} else {
 				// RIGHT PADDLE
