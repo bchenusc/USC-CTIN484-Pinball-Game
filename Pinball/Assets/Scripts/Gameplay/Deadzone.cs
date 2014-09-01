@@ -20,10 +20,10 @@ public class Deadzone : MonoBehaviour {
 		if (c.gameObject.CompareTag("Ball")) {
 			if (myPlayer == DeadZonePlayer.Player1) {
 				// Add score to player 2
-				mGameState.Player1Score += 1;
+				mGameState.Player2Score += 1;
 			} else {
 				// Add score to player 1
-				mGameState.Player2Score += 1;
+				mGameState.Player1Score += 1;
 			}
 			Destroy(c.gameObject);
 		}

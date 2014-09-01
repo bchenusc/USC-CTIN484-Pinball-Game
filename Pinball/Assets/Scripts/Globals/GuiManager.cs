@@ -24,24 +24,24 @@ public class GuiManager : Singleton{
 
 	public void RegisterP1GuiText(GUIText text) {
 		mP1GuiText = text;
-		text.text = "P1 Score: \n 0";
+		text.text = "0";
 	}
 
 	public void RegisterP2GuiTExt(GUIText text) {
 		mP2GuiText = text;
-		text.text = "P2 Score: \n 0";
+		text.text = "0";
 	}
 
 	public void UpdateP1GuiText(int score) {
-		//if (mP1GuiText != null) {
-			mP1GuiText.text = "P1 Score: \n" + score;
-		//}
+		if (mP1GuiText != null) {
+			mP1GuiText.text = "" + score;
+		}
 	}
 
 	public void UpdateP2GuiText(int score) {
-		//if (mP2GuiText != null) {
-			mP2GuiText.text = "P2 Score: \n" + score;
-		//}
+		if (mP2GuiText != null) {
+			mP2GuiText.text = "" + score;
+		}
 	}
 
 	
