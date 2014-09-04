@@ -58,11 +58,7 @@ public class Paddle : MonoBehaviour {
 			if (isLeftPaddle()) {
 				// LEFT PADDLE
 				if (key == mInputManager.p1Left){
-//					if (mHingeJoint.jointAngle < mHingeJoint.limits.max) {
-//						mJointMotor.motorSpeed = mMotorPowerUp;
-//						mHingeJoint.motor = mJointMotor;
-//					}
-//					else {
+//					
 						mJointMotor.motorSpeed = mMotorPowerUp;
 						mHingeJoint.motor = mJointMotor;
 //					}
@@ -97,6 +93,7 @@ public class Paddle : MonoBehaviour {
 			// LEFT PADDLE
 			if(isLeftPaddle()) {
 				if (key == mInputManager.p1Left){
+					if (mHingeJoint == null) mHingeJoint = transform.GetComponent<HingeJoint2D> ();
 					mJointMotor.motorSpeed = -mMotorPowerUp;
 					mHingeJoint.motor = mJointMotor;
 				} 
@@ -132,6 +129,11 @@ public class Paddle : MonoBehaviour {
 		} else {
 			return false;
 		}
+	}
+
+	void OnDestroy() {
+		mInputManager.DeregisterOnKeyHeld(Flip);
+		mInputManager.DeregisterOnKeyUp(UnFlip);
 	}
 }
 

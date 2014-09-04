@@ -22,6 +22,11 @@ public class GameState : Singleton {
 	private int i_CurrentLevel = 0;
 	private int i_NextLevelQueue = 0; //set this before fading out to change levels.
 
+	public void ResetScore() {
+		mPlayer1Score = 0;
+		mPlayer2Score = 0;
+	}
+
 	public int Player1Score {
 		get { return mPlayer1Score; }
 		set { 
@@ -51,11 +56,17 @@ public class GameState : Singleton {
 	}
 
 	void OnLevelWasLoaded(int i){
-		// i_CurrentLevel = GetCurrentLevelInt();
-		// i_NextLevelQueue = 0; // I set this to zero here. When you change levels, make sure you set which level you are changing to.
-
+		SingletonObject.Get.getInputManager ().PauseInput = false;
 	}
 #endregion
+
+	public void PauseGame(){
+		Time.timeScale = 0;
+	}
+
+	public void ResumeGame(){
+		Time.timeScale = 1;
+	}
 	
 
 #region Level Getters Functions
@@ -125,12 +136,16 @@ public class GameState : Singleton {
 	//Loads "level to load" which is an index of a level in SCENES.
 	public void LoadLevel(int levelToLoad){
 		i_NextLevelQueue = levelToLoad;
+		SingletonObject.Get.getTimer ().RemoveAll ();
+		SingletonObject.Get.getInputManager ().PauseInput = true;
 		Application.LoadLevel(i_NextLevelQueue);
 	}
 
 	//Loads a level based on the name of the level.
 	public void LoadLevel(string levelToLoadName){
 		i_NextLevelQueue = GetLevelInt(levelToLoadName);
+		SingletonObject.Get.getTimer ().RemoveAll ();
+		SingletonObject.Get.getInputManager ().PauseInput = true;
 		Application.LoadLevel(i_NextLevelQueue);
 	}
 

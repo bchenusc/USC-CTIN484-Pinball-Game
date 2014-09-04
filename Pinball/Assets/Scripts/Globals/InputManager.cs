@@ -33,8 +33,11 @@ public class InputManager : Singleton{
 	private bool p2LeftDown = false;
 	private bool p2RightDown = false;
 
+	public bool PauseInput = false;
+
 	// Update is called once per frame
 	public void Update () {
+		if (PauseInput) return;
 		// Reduces number of calls for polling input.
 		if (OnKeyHeld != null) {
 			// P1 Left
@@ -96,7 +99,7 @@ public class InputManager : Singleton{
 		OnKeyUp += a;
 	}
 	public void DeregisterOnKeyUp(ActionKey a) {
-		OnKeyUp += a;
+		OnKeyUp -= a;
 	}
 	#endregion
 

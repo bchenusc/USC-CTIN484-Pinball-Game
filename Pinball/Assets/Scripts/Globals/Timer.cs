@@ -119,6 +119,12 @@ public class Timer : Singleton  {
 		else return false;
 	}
 
+	public void RemoveAll() {
+		foreach (TimerInstance t in sl_active.Values) {
+			t.b_removeMe = true;
+		}
+	}
+
 	public bool Remove(string name){
 		if (sl_active.ContainsKey(name)){
 			sl_active[name].b_removeMe = true;
