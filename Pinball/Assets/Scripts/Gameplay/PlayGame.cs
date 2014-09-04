@@ -14,8 +14,9 @@ public class PlayGame : MonoBehaviour {
 		transform.GetComponent<SpriteRenderer> ().enabled = true;
 		
 	}
-	void OnMouseDown() {
-		SingletonObject.Get.getGameState ().LoadLevel (1);
-		Destroy (gameObject);
+	void Update() {
+		if (Input.GetMouseButtonDown(0)){
+			SingletonObject.Get.getGameState().LoadLevel(1);
+		}
 	}
 }
