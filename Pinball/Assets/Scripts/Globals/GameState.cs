@@ -14,8 +14,11 @@ public class GameState : Singleton {
 	//Game Logic Here
 	private int mPlayer1Score = 0;
 	private int mPlayer2Score = 0;
+	private int maxScore = 20;
 
 	GuiManager mGuiManager;
+	GUIText winner;
+	Transform pauseGame;
 
 	//Game Progression
 	public List<string> SCENES;
@@ -32,6 +35,9 @@ public class GameState : Singleton {
 		set { 
 			mPlayer1Score = value;
 			mGuiManager.UpdateP1GuiText(value);
+			if (mPlayer1Score == maxScore) {
+				Winner(true);
+			}
 		}
 	}
 
@@ -40,7 +46,20 @@ public class GameState : Singleton {
 		set { 
 			mPlayer2Score = value;
 			mGuiManager.UpdateP2GuiText(value);
+			if (mPlayer2Score == maxScore) {
+				Winner(false);
+			}
 		}
+	}
+
+	public void Winner(bool player1) {
+		if (player1)
+			winner.text = "Player 1 Wins!";
+		else 
+			winner.text = "Player 2 Wins!";
+		Destroy (pauseGame.GetComponent<CircleCollider2D> ());
+		pauseGame.GetComponent<PauseGame> ().enabled = false;
+		PauseGame ();
 	}
 
 #region MonoBehaviour functions
@@ -56,6 +75,11 @@ public class GameState : Singleton {
 	}
 
 	void OnLevelWasLoaded(int i){
+		if (i == 1) {
+			Transform g = GameObject.FindGameObjectWithTag("WinnerText").transform;
+			winner = g.GetComponent<GUIText>();
+			pauseGame = GameObject.FindGameObjectWithTag("PauseGame").transform;
+		}
 		SingletonObject.Get.getInputManager ().PauseInput = false;
 	}
 #endregion

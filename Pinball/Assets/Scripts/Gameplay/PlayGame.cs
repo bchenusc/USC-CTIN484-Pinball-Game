@@ -16,6 +16,7 @@ public class PlayGame : MonoBehaviour {
 	}
 	void Update() {
 		if (Input.GetKeyDown(KeyCode.Space)){
+			Time.timeScale = 1;
 			SingletonObject.Get.getGameState().LoadLevel(1);
 		}
 	}
